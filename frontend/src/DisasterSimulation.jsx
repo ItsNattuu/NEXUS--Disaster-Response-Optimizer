@@ -29,7 +29,7 @@ export default function DisasterSimulation({ locations = [], edges = [], source,
     if (source === sink) { setError("Source and destination must differ."); return; }
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/simulate-and-calculate", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/simulate-and-calculate`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           disaster_type: scenario,

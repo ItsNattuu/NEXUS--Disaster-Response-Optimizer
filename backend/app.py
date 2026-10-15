@@ -1,4 +1,4 @@
-
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -24,8 +24,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 ROOT = Path(__file__).resolve().parent.parent
-EXECUTABLE = ROOT / "nexus.exe"
+
+EXECUTABLE = Path(
+    os.getenv(
+        "NEXUS_EXECUTABLE",
+        str(ROOT / ("nexus.exe" if os.name == "nt" else "nexus"))
+    )
+)
+
 
 
 class Edge(BaseModel):
